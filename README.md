@@ -28,6 +28,7 @@ INSTALLATION:
 RUNNING THE APPLICATION
 
 Test the apis as follows:
+
 	POST:
 		curl -X POST -H "Content-Type:application/json" http://127.0.0.1:8000/core/v1/member/ -d '{"phone":"8884599393","email":"kanha.prayas@gmail.com","role":"admin","first_name":"Arunima","last_name":"Nayak"}'
 
