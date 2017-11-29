@@ -37,8 +37,12 @@ class Member(View):
 
 	def post(self, request, *args, **kwargs):
 
-		#Load the member fields to member_data 
-		member_data = json.loads(request.body)
+		#Load the member fields to member_data
+		try:
+			member_data = json.loads(request.body)
+		except ValueError,e:
+			return HttpResponseBadRequest(json.dumps({"message":INVALID_INPUT}), 
+						content_type='application/json')
 
 		#Create a Team object
 		member = Team(**member_data)
@@ -73,15 +77,19 @@ class Member(View):
 
 	def put(self, request, *args, **kwargs):
 
-		#Load the member fields to member_data 
-		member_data = json.loads(request.body)
+		#Load the member fields to member_data
+		try:
+			member_data = json.loads(request.body)
+		except ValueError,e:
+			return HttpResponseBadRequest(INVALID_INPUT, 
+						content_type='application/json')
 
 		#get the team object
 		try:
 			member = Team.objects.get(id = member_data["id"])
 
 		except (Team.DoesNotExist, KeyError, ValueError) as e:
-			return HttpResponseBadRequest(json.dumps({"message":NO_MEMBER_ERROR}), 
+			return HttpResponseBadRequest(json.dumps({"message":INVALID_INPUT}), 
 						content_type='application/json')
 
 		#Set all keys with new values
@@ -103,8 +111,12 @@ class Member(View):
 
 	def delete(self, request, *args, **kwargs):
 
-		#Load the member fields to member_data 
-		member_data = json.loads(request.body)
+		#Load the member fields to member_data
+		try:
+			member_data = json.loads(request.body)
+		except ValueError,e:
+			return HttpResponseBadRequest(json.dumps({"message":INVALID_INPUT}), 
+						content_type='application/json')
 
 		#get the team object
 		try:

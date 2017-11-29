@@ -11,3 +11,4 @@ DELETED_STATUS = -1
 
 #views.py
 NO_MEMBER_ERROR = "No such member exists"
+INVALID_INPUT = "Invalid data content"
