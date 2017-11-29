@@ -80,10 +80,7 @@ class Member(View):
 		try:
 			member = Team.objects.get(id = member_data["id"])
 
-		except Team.DoesNotExist:
-			return HttpResponseBadRequest(json.dumps({"message":NO_MEMBER_ERROR}), 
-						content_type='application/json')
-		except KeyError,ValidationError:
+		except (Team.DoesNotExist, KeyError, ValueError) as e:
 			return HttpResponseBadRequest(json.dumps({"message":NO_MEMBER_ERROR}), 
 						content_type='application/json')
 
@@ -113,10 +110,7 @@ class Member(View):
 		try:
 			member = Team.objects.get(id = member_data["id"])
 
-		except Team.DoesNotExist:
-			return HttpResponseBadRequest(json.dumps({"message":NO_MEMBER_ERROR}), 
-						content_type='application/json')
-		except KeyError,ValidationError:
+		except (Team.DoesNotExist, KeyError, ValueError) as e:
 			return HttpResponseBadRequest(json.dumps({"message":NO_MEMBER_ERROR}), 
 						content_type='application/json')
 
