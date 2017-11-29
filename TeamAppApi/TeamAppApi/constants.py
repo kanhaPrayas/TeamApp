@@ -7,3 +7,7 @@ ROLE_CHOICES = (
 				("admin","admin",),
 				("regular","regular"),
 				)
+DELETED_STATUS = -1
+
+#views.py
+NO_MEMBER_ERROR = "No such member exists"
