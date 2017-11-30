@@ -54,10 +54,10 @@ Test the DRF apis as follows:
 		curl -X GET -H "Content-Type:application/json" http://127.0.0.1:8000/core/v1/drf/member/
 
 	PUT:
-		curl -X PUT -H "Content-Type:application/json" http://127.0.0.1:8000/core/v1/drf/member/ -d '{"phone":"8884599393","email":"kanha.prayas@gmail.com","role":"admin","first_name":"Arunima","last_name":"Nayak","id":"3323323"}'
+		curl -X PUT -H "Content-Type:application/json" http://127.0.0.1:8000/core/v1/drf/member/12/ -d '{"phone":"8884599393","email":"kanha.prayas@gmail.com","role":"admin","first_name":"Arunima","last_name":"Nayak"}'
 
 	DELETE:
-		curl -X DELETE -H "Content-Type:application/json" http://127.0.0.1:8000/core/v1/drf/member/ -d '{"id":"3323323"}'
+		curl -X DELETE -H "Content-Type:application/json" http://127.0.0.1:8000/core/v1/drf/member/12/
 
 
 
