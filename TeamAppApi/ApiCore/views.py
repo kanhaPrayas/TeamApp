@@ -13,6 +13,7 @@ from django.db.models import Count
 from django.core import serializers
 from django.core.exceptions import ValidationError
 from django.forms.models import model_to_dict
+from rest_framework import generics
 #Modules Imports related to Django ends here
 
 #Python System module imports starts here
@@ -24,6 +25,7 @@ import inspect
 #Project related module imports starts here
 from TeamAppApi.constants import *
 from .models import *
+from .serializers import TeamSerializer
 #Project related module imports ends here
 
 
@@ -137,4 +139,21 @@ class Member(View):
 
 	def serialize_obj(self,obj):
 		return dict(obj)
+
+class CreateView(generics.ListCreateAPIView):
+    """This class defines the create behavior of our rest api."""
+    queryset = Team.objects.all()
+    serializer_class = TeamSerializer
+
+    def perform_create(self, serializer):
+        """Save the post data when creating a new member."""
+        serializer.save()
+
+class DetailsView(generics.RetrieveUpdateDestroyAPIView):
+    """This class handles the http GET, PUT and DELETE requests."""
+
+    queryset = Team.objects.all()
+    serializer_class = TeamSerializer
+
+
 
