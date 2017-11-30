@@ -41,7 +41,7 @@ class Member(View):
 		try:
 			member_data = json.loads(request.body)
 		except ValueError,e:
-			return HttpResponseBadRequest(json.dumps({"message":INVALID_INPUT}), 
+			return HttpResponseBadRequest(json.dumps(INVALID_INPUT_JSON), 
 						content_type='application/json')
 
 		#Create a Team object
@@ -71,6 +71,9 @@ class Member(View):
 							.values('id', 'first_name', 'last_name',\
 							'age','role','phone','email','status')\
 							.exclude(status=DELETED_STATUS)
+		if len(member_arr) == 0:
+			return HttpResponseNotFound(json.dumps(NO_MEMBER_ERROR),
+							content_type='application/json')
 
 		return HttpResponse(json.dumps(list(member_arr)),
 							content_type='application/json')
@@ -81,15 +84,15 @@ class Member(View):
 		try:
 			member_data = json.loads(request.body)
 		except ValueError,e:
-			return HttpResponseBadRequest(INVALID_INPUT, 
+			return HttpResponseBadRequest(json.dumps(INVALID_INPUT_JSON), 
 						content_type='application/json')
 
 		#get the team object
 		try:
-			member = Team.objects.get(id = member_data["id"])
+			member = Team.objects.get(id = kwargs["id"])
 
 		except (Team.DoesNotExist, KeyError, ValueError) as e:
-			return HttpResponseBadRequest(json.dumps({"message":INVALID_INPUT}), 
+			return HttpResponseBadRequest(json.dumps(INVALID_INPUT_JSON), 
 						content_type='application/json')
 
 		#Set all keys with new values
@@ -115,7 +118,7 @@ class Member(View):
 		try:
 			member_data = json.loads(request.body)
 		except ValueError,e:
-			return HttpResponseBadRequest(json.dumps({"message":INVALID_INPUT}), 
+			return HttpResponseBadRequest(json.dumps(INVALID_INPUT_JSON), 
 						content_type='application/json')
 
 		#get the team object
@@ -123,7 +126,7 @@ class Member(View):
 			member = Team.objects.get(id = member_data["id"])
 
 		except (Team.DoesNotExist, KeyError, ValueError) as e:
-			return HttpResponseBadRequest(json.dumps({"message":NO_MEMBER_ERROR}), 
+			return HttpResponseBadRequest(json.dumps(NO_MEMBER_ERROR), 
 						content_type='application/json')
 
 		else:

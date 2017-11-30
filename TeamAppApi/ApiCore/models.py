@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from django.core.exceptions import ValidationError
 from django.db import models
 from TeamAppApi.constants import ROLE_CHOICES
+from TeamAppApi.utils import tele_match
 
 class Team(models.Model):
 	"""This class represents the Team model."""
@@ -12,7 +13,7 @@ class Team(models.Model):
 	age = models.IntegerField(default=18)
 	#role choice could be admin or regular
 	role = models.CharField(max_length=100, choices=ROLE_CHOICES)
-	phone = models.CharField(max_length=100)
+	phone = models.CharField(max_length=100,validators=[tele_match])
 	email = models.EmailField(max_length=100)
 	created_on = models.DateTimeField(auto_now_add = True)
 	updated_on = models.DateTimeField(auto_now = True)
