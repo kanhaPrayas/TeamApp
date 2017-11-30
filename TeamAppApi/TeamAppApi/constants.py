@@ -1,17 +1,17 @@
-#Constants file for any constants getting used accross project
+# Constants file for any constants getting used accross project
 
-#ApiCore app Constants
+# ApiCore app Constants
 
-#models.py
+# models.py
 ROLE_CHOICES = (
-				("admin","admin",),
-				("regular","regular"),
-				)
+    ("admin", "admin",),
+    ("regular", "regular"),
+)
 DELETED_STATUS = -1
 
-#views.py
-NO_MEMBER_ERROR = {"message":"No such member exists"}
-INVALID_INPUT_JSON = {"message":"Invalid data content"}
+# views.py
+NO_MEMBER_ERROR = {"message": "No such member exists"}
+INVALID_INPUT_JSON = {"message": "Invalid data content"}
 
 VALID_TELEPHONE_STRING = """
 							(+91)8884599393,
